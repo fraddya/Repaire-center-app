@@ -1,0 +1,1 @@
+ALTER TABLE user ADD COLUMN pass_word varchar(200);

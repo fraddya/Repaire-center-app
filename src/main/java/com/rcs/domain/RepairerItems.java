@@ -5,30 +5,29 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+import java.math.BigDecimal;
+
 @Getter
 @Setter
+@Entity
 @Table
-public class Vehicle extends CreateModifyAwareBaseEntity {
+public class RepairerItems extends CreateModifyAwareBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    private String vehicleNo;
-    private String model;
-    private String year;
-    private String color;
-    private String type;
     private String description;
+    private Integer quantity;
+    private BigDecimal estimatePrice;
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @OneToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+    @JoinColumn(name = "part_id")
+    private VehiclePart part;
+
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
 }

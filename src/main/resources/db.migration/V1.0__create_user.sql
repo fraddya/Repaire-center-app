@@ -18,4 +18,6 @@ image varchar(200),
 religion varchar(20),
 email varchar(200),
 user_logging varchar(200),
+pass_word varchar(100),
+role varchar(100),
  primary key (id)) engine=InnoDB AUTO_INCREMENT=1;

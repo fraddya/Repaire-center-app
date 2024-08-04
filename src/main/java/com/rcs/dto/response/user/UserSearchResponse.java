@@ -2,6 +2,7 @@ package com.rcs.dto.response.user;
 
 import com.rcs.enums.GenderType;
 import com.rcs.enums.Status;
+import com.rcs.enums.UserType;
 import lombok.Data;
 
 @Data
@@ -22,5 +23,6 @@ public class UserSearchResponse {
     private String email;
     private String userLogging;
     private String passWord;
+    private UserType role;
     private Status status;
 }

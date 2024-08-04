@@ -8,6 +8,7 @@ import com.rcs.domain.Vehicle;
 import com.rcs.domain.base.ComplexValidationException;
 import com.rcs.domain.criteria.UserCriteria;
 import com.rcs.enums.Status;
+import com.rcs.enums.UserType;
 import com.rcs.repository.UserRepository;
 import com.rcs.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
@@ -34,19 +35,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    /*@Autowired
-    private PasswordEncoder passwordEncoder;*/
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     @Override
     public User save(User user) {
         User persistedUser = userRepository.findByEmail(user.getEmail());
         if (persistedUser != null) {
-            throw new ComplexValidationException("user register","this Email already registered");
+            throw new RuntimeException("this Email already registered");
         }
         user.setStatus(Status.ACTIVE);
         user.setDateJoin(LocalDate.now());
-        //user.setPassWord(passwordEncoder.encode(user.getPassWord()));
+        if (user.getRole() == null) user.setRole(UserType.USER);
+        user.setPassWord(passwordEncoder.encode(user.getPassWord()));
         return userRepository.save(user);
     }
 
@@ -81,7 +83,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User retrieve(Long id) {
         return userRepository.findById(id).orElseThrow(()->
-                new ComplexValidationException("Employee id (%s) not found", id.toString()));
+                new RuntimeException("Employee id (%s) not found  "+ id));
     }
 
     /*@Transactional
@@ -128,7 +130,7 @@ public class UserServiceImpl implements UserService {
     public User update(User user) {
         Optional<User> userPersisted = userRepository.findById(user.getId());
         if (!userPersisted.isPresent()) {
-            throw new ComplexValidationException("User retrieval", "Cannot find any User for this id");
+            throw new RuntimeException("Cannot find any User for this id");
         } else {
             User userDb = userPersisted.get();
             updateFields(user, userDb);
@@ -150,7 +152,8 @@ public class UserServiceImpl implements UserService {
         if (user.getNationality() != null) userDb.setNationality(user.getNationality());
         if (user.getImage() != null) userDb.setImage(user.getImage());
         if (user.getReligion() != null) userDb.setReligion(user.getReligion());
-        //if (user.getPassWord() != null) userDb.setPassWord(passwordEncoder.encode(user.getPassWord()));
+        if (user.getPassWord() != null) userDb.setPassWord(passwordEncoder.encode(user.getPassWord()));
+        //if (user.getPassWord() != null) userDb.setPassWord((user.getPassWord()));
         if (user.getRole() != null) userDb.setRole(user.getRole());
 
     }

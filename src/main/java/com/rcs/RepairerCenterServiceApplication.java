@@ -8,8 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;*/
 
 @SpringBootApplication
 public class RepairerCenterServiceApplication {
-
-    /*@Bean
+/*
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }*/

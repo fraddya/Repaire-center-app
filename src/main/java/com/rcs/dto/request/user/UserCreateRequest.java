@@ -3,6 +3,7 @@ package com.rcs.dto.request.user;
 
 import com.rcs.enums.GenderType;
 import com.rcs.enums.Status;
+import com.rcs.enums.UserType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -35,5 +36,6 @@ public class UserCreateRequest {
     private String email;
     private String userLogging;
     private String passWord;
+    private UserType role;
     private Status status;
 }

@@ -1,13 +1,16 @@
 package com.rcs.controller;
 
 
+import com.rcs.domain.Brand;
 import com.rcs.domain.VehiclePart;
+import com.rcs.domain.base.ComplexValidationException;
 import com.rcs.domain.base.ListResponseWrapper;
 import com.rcs.domain.base.SingleItemResponseWrapper;
 import com.rcs.dto.request.vehiclepart.VehiclePartCreateRequest;
 import com.rcs.dto.response.vehiclepart.VehiclePartCreateResponse;
 import com.rcs.dto.response.vehiclepart.VehiclePartViewResponse;
 import com.rcs.mapper.VehiclePartMapper;
+import com.rcs.repository.BrandRepository;
 import com.rcs.service.VehiclePartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -26,6 +30,9 @@ public class VehiclePartController {
 
     @Autowired
     private VehiclePartMapper vehiclePartMapper;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     @PostMapping("${app.endpoint.vehiclePartsCreate}")
     public ResponseEntity<SingleItemResponseWrapper<VehiclePartCreateResponse>> create(@RequestBody VehiclePartCreateRequest request) {
@@ -48,8 +55,14 @@ public class VehiclePartController {
     }
 
     @GetMapping("${app.endpoint.vehiclePartsSuggestion}")
-    public ResponseEntity<ListResponseWrapper<VehiclePartViewResponse>> suggestion(VehiclePartCreateRequest request) {
+    public ResponseEntity<ListResponseWrapper<VehiclePartViewResponse>> suggestion(@PathVariable Long brandId, VehiclePartCreateRequest request) {
+        Optional<Brand> brand = brandRepository.findById(brandId);
         VehiclePart vehiclePart = vehiclePartMapper.mapToCreate(request);
+        if (brand.isPresent()) {
+            vehiclePart.setBrand(brand.get());
+        }else {
+            throw new ComplexValidationException("vehicle part suggestion", "brand not found");
+        }
         List<VehiclePart> results = vehiclePartService.findAll(vehiclePart);
         List<VehiclePartViewResponse> vehicleParts = vehiclePartMapper.mapToViewResponse(results);
         return new ResponseEntity<>(new ListResponseWrapper<>(vehicleParts), HttpStatus.OK);

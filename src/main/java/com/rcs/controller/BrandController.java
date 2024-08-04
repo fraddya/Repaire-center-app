@@ -31,7 +31,6 @@ public class BrandController {
 
     @PostMapping("${app.endpoint.brandsCreate}")
     public ResponseEntity<SingleItemResponseWrapper<BrandSearchResponse>> create(@RequestBody BrandCreateRequest request) {
-
         Brand brand = modelMapper.mapToCreate(request);
 
         Brand persistedBrand = service.createBrand(brand);

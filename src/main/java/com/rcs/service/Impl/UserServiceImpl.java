@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         User persistedUser = userRepository.findByEmail(user.getEmail());
         if (persistedUser != null) {
-            throw new RuntimeException("this Email already registered");
+            throw new ComplexValidationException("User registration", "this Email already registered");
         }
         user.setStatus(Status.ACTIVE);
         user.setDateJoin(LocalDate.now());
@@ -76,61 +76,30 @@ public class UserServiceImpl implements UserService {
         } else {
             users = userRepository.findAll(page);
         }
+        for (User user : users) {
+            user.getVehicle().size();
+        }
         return users;
     }
 
     @Transactional(readOnly = true)
     @Override
     public User retrieve(Long id) {
-        return userRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Employee id (%s) not found  "+ id));
+        Optional<User> userPersisted = userRepository.findById(id);
+        if (!userPersisted.isPresent()) {
+            throw new ComplexValidationException("user retrieval","User (%s) not found  ");
+        }
+        userPersisted.get().getVehicle().size();
+        return userPersisted.get();
     }
 
-    /*@Transactional
-    @Override
-    public User update(User user) {
-        user.setStatus(Status.ACTIVE);
-        Optional<User> userPersisted = userRepository.findById(user.getId());
-        if (userPersisted.isPresent()) {
-            if (user.getAge() != null) {
-                userPersisted.get().setAge(user.getAge());
-            }
-            if (user.getFirstName() != null) {
-                userPersisted.get().setFirstName(user.getFirstName());
-            }
-            if (user.getLastName() != null) {
-                userPersisted.get().setLastName(user.getLastName());
-            }
-            if (user.getContactNo() != null) {
-                userPersisted.get().setContactNo(user.getContactNo());
-            }
-            if (user.getGenderType() != null) {
-                userPersisted.get().setGenderType(user.getGenderType());
-            }
-            if (user.getNic() != null) {
-                userPersisted.get().setNic(user.getNic());
-            }
-            if (user.getNationality() != null) {
-                userPersisted.get().setNationality(user.getNationality());
-            }
-            if (user.getReligion() != null) {
-                userPersisted.get().setReligion(user.getReligion());
-            }
-            if (user.getPassWord() != null) {
-                userPersisted.get().setPassWord(passwordEncoder.encode(user.getPassWord()));
-            }
-            return userRepository.save(userPersisted.get());
-        } else {
-            throw new ComplexValidationException("Employee id (%s) not found", userPersisted.get().getId().toString());
-        }
-    }*/
 
     @Transactional
     @Override
     public User update(User user) {
         Optional<User> userPersisted = userRepository.findById(user.getId());
         if (!userPersisted.isPresent()) {
-            throw new RuntimeException("Cannot find any User for this id");
+            throw new ComplexValidationException("User retrieval", "Cannot find any User ");
         } else {
             User userDb = userPersisted.get();
             updateFields(user, userDb);
@@ -213,8 +182,9 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             user.setStatus(Status.DELETED);
             return userRepository.save(user);
+        }else {
+            throw new ComplexValidationException("User retrieval", "Cannot find any User ");
         }
-        return null;
     }
 
     @Override
@@ -224,12 +194,11 @@ public class UserServiceImpl implements UserService {
             if (passwordEncoder.matches(user.getPassWord(), userPersisted.getPassWord())) {
                 userPersisted.setUserLogging(LocalDateTime.now());
                 userRepository.save(userPersisted);
+                userPersisted.getVehicle().size();
                 return userPersisted;
             }
-        } else {
-            throw new ComplexValidationException("User credentials Invalid", user.getEmail());
         }
-        return null;
+        throw new ComplexValidationException("User credentials Invalid", user.getEmail());
     }
 
 }

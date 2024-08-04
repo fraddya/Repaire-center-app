@@ -23,6 +23,10 @@ public class BrandServiceImpl implements BrandService {
     @Transactional
     @Override
     public Brand createBrand(Brand brand) {
+        Brand brandPersisted = repository.findByName(brand.getName());
+        if (brandPersisted != null) {
+            throw new ComplexValidationException("BrandCreateRequest", "Brand already registered");
+        }
         brand.setStatus(Status.ACTIVE);
         return repository.save(brand);
     }
@@ -33,11 +37,10 @@ public class BrandServiceImpl implements BrandService {
         if(brandPersisted.isPresent()) {
             Brand brandDb = brandPersisted.get();
             brandDb.setStatus(Status.DELETED);
-            repository.save(brandDb);
+            return repository.save(brandDb);
         } else {
             throw new ComplexValidationException("BrandDeleteRequest", "Invalid Brand id");
         }
-        return brandPersisted.get();
     }
     @Transactional(readOnly = true)
     @Override

@@ -221,11 +221,11 @@ public class UserServiceImpl implements UserService {
     public User logIn(User user) {
         User userPersisted = userRepository.findByEmail(user.getEmail());
         if (userPersisted != null) {
-            /*if (passwordEncoder.matches(user.getPassWord(), userPersisted.getPassWord())) {
+            if (passwordEncoder.matches(user.getPassWord(), userPersisted.getPassWord())) {
                 userPersisted.setUserLogging(LocalDateTime.now());
                 userRepository.save(userPersisted);
                 return userPersisted;
-            }*/
+            }
         } else {
             throw new ComplexValidationException("User credentials Invalid", user.getEmail());
         }

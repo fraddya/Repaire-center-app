@@ -1,6 +1,7 @@
 package com.rcs.domain;
 
 import com.rcs.domain.base.CreateModifyAwareBaseEntity;
+import com.rcs.enums.RepairerItemStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class RepairerItems extends CreateModifyAwareBaseEntity {
     private String description;
     private Integer quantity;
     private BigDecimal estimatePrice;
-    private String status;
+    private RepairerItemStatus status;
 
     @OneToOne
     @JoinColumn(name = "part_id")

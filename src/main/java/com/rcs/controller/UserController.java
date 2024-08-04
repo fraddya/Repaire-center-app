@@ -104,4 +104,12 @@ public class UserController {
         }
         return new ResponseEntity<>(new SingleItemResponseWrapper<>(response), HttpStatus.OK);
     }
+
+    @GetMapping("${app.endpoint.userLogIn}")
+    public ResponseEntity<SingleItemResponseWrapper<UserSearchResponse>> logIn(
+            @Validated @RequestBody UserCreateRequest request) {
+        User user = userService.logIn(userMapper.mapToUser(request));
+        UserSearchResponse response = userMapper.mapToUserViewResponse(user);
+        return new ResponseEntity<>(new SingleItemResponseWrapper<>(response), HttpStatus.OK);
+    }
 }

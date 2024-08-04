@@ -1,6 +1,7 @@
 package com.rcs.config;
 
 
+import com.rcs.util.ReadJsonFileToJsonObject;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -17,7 +18,7 @@ import org.springframework.http.MediaType;
 @Configuration
 @AllArgsConstructor
 public class OpenApiConfig {
-    //private final ReadJsonFileToJsonObject readJsonFileToJsonObject;
+    private final ReadJsonFileToJsonObject readJsonFileToJsonObject;
 
     @Bean
     public OpenAPI springShopOpenAPI() {

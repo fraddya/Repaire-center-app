@@ -1,4 +1,4 @@
-create table vehicle_part
+create table vehicle
 (id bigint not null auto_increment,
  status varchar(10),
 created_by bigint,

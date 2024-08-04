@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -25,7 +27,7 @@ public class User extends CreateModifyAwareBaseEntity {
     private String firstName;
     private String lastName;
     private String contactNo;
-    private String dateJoin;
+    private LocalDate dateJoin;
     private Integer age;
     private GenderType genderType;
     private String nic;
@@ -33,7 +35,7 @@ public class User extends CreateModifyAwareBaseEntity {
     private String image;
     private String religion;
     private String email;
-    private String userLogging;
+    private LocalDateTime userLogging;
     private String passWord;
     private UserType role;
     private Status status;

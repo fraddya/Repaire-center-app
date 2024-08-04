@@ -7,6 +7,7 @@ import com.rcs.domain.base.SingleItemResponseWrapper;
 import com.rcs.domain.criteria.UserCriteria;
 import com.rcs.dto.request.user.UserCreateRequest;
 import com.rcs.dto.request.user.UserSearchRequest;
+import com.rcs.dto.request.user.UserUpdateRequest;
 import com.rcs.dto.response.user.UserCreateResponse;
 import com.rcs.dto.response.user.UserSearchResponse;
 import com.rcs.mapper.UserMapper;
@@ -49,9 +50,9 @@ public class UserController {
 
     @PutMapping("${app.endpoint.userUpdate}")
     public ResponseEntity<SingleItemResponseWrapper<UserCreateResponse>> update(
-            @PathVariable Long id, @Validated @RequestBody UserCreateRequest request) {
+            @PathVariable Long id, @Validated @RequestBody UserUpdateRequest request) {
 
-        User employee = userMapper.mapToUser(request);
+        User employee = userMapper.mapToUserUpdate(request);
 
         employee.setId(id);
         User updateEmployee = userService.update(employee);

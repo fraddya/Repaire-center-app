@@ -8,6 +8,7 @@ import lombok.Data;
 public class BrandSearchResponse {
     private Long id;
     private String name;
-
+    private String code;
+    private String description;
     private Status status;
 }

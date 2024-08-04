@@ -1,6 +1,7 @@
 package com.rcs.domain;
 
 import com.rcs.domain.base.CreateModifyAwareBaseEntity;
+import com.rcs.enums.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public class Vehicle extends CreateModifyAwareBaseEntity {
     private String color;
     private String type;
     private String description;
-    private String status;
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

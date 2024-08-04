@@ -203,6 +203,7 @@ public class UserServiceImpl implements UserService {
         if (updatedVehicle.getDescription() != null) existingVehicle.setDescription(updatedVehicle.getDescription());
         if (updatedVehicle.getStatus() != null) existingVehicle.setStatus(updatedVehicle.getStatus());
         if (updatedVehicle.getBrand() != null) existingVehicle.setBrand(updatedVehicle.getBrand());
+        updatedVehicle.setStatus(Status.ACTIVE);
     }
 
     @Transactional

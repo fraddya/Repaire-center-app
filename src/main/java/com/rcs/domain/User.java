@@ -40,6 +40,6 @@ public class User extends CreateModifyAwareBaseEntity {
     private UserType role;
     private Status status;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" ,cascade = { CascadeType.ALL }, orphanRemoval = true)
     private List<Vehicle> vehicle;
 }

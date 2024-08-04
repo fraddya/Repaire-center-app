@@ -5,6 +5,7 @@ import com.rcs.domain.User;
 import com.rcs.domain.criteria.UserCriteria;
 import com.rcs.dto.request.user.UserCreateRequest;
 import com.rcs.dto.request.user.UserSearchRequest;
+import com.rcs.dto.request.user.UserUpdateRequest;
 import com.rcs.dto.response.user.UserCreateResponse;
 import com.rcs.dto.response.user.UserSearchResponse;
 import com.rcs.enums.Status;
@@ -16,6 +17,8 @@ import java.util.List;
 public interface UserMapper {
 
     User mapToUser(UserCreateRequest request);
+
+    User mapToUserUpdate(UserUpdateRequest request);
 
     UserCriteria mapToCriteria(UserSearchRequest request);
 

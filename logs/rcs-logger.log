@@ -1476,3 +1476,136 @@ java.lang.RuntimeException: this Email already registered
 08:17:44.848 [http-nio-1001-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 08:17:44.849 [http-nio-1001-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 08:17:44.851 [http-nio-1001-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+08:25:37.114 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+08:25:37.116 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+08:25:37.125 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+08:26:56.253 [main] INFO  com.rcs.RepairerCenterServiceApplication - Starting RepairerCenterServiceApplication using Java 17.0.9 with PID 17948 (G:\MyProject\Final Project\repairer-center-service\target\classes started by fraddy in G:\MyProject\Final Project\repairer-center-service)
+08:26:56.255 [main] INFO  com.rcs.RepairerCenterServiceApplication - The following 1 profile is active: "local"
+08:26:57.204 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:26:57.295 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 81 ms. Found 4 JPA repository interfaces.
+08:26:57.866 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 1001 (http)
+08:26:57.876 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:26:57.877 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+08:26:57.982 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring embedded WebApplicationContext
+08:26:57.983 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1673 ms
+08:26:58.173 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 9.16.3 by Redgate
+08:26:58.173 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+08:26:58.173 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - 
+08:26:58.185 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+08:26:58.347 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1537c744
+08:26:58.349 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+08:26:58.383 [main] INFO  org.flywaydb.core.internal.database.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/rcs (MySQL 8.0)
+08:26:58.456 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.039s)
+08:26:58.475 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `rcs`: 1.3
+08:26:58.476 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `rcs` is up to date. No migration necessary.
+08:26:58.566 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:26:58.642 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+08:26:58.647 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+08:26:58.953 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+08:27:00.193 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+08:27:00.197 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:27:01.716 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 1001 (http) with context path '/rcs/api'
+08:27:01.729 [main] INFO  com.rcs.RepairerCenterServiceApplication - Started RepairerCenterServiceApplication in 6.286 seconds (process running for 7.289)
+08:27:23.684 [http-nio-1001-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:27:23.685 [http-nio-1001-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:27:23.687 [http-nio-1001-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+08:28:26.435 [http-nio-1001-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.rcs.domain.base.SingleItemResponseWrapper<com.rcs.dto.response.user.UserCreateResponse>> com.rcs.controller.UserController.update(java.lang.Long,com.rcs.dto.request.user.UserCreateRequest) with 6 errors: [Field error in object 'userCreateRequest' on field 'nic': rejected value [null]; codes [NotNull.userCreateRequest.nic,NotNull.nic,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userCreateRequest.nic,nic]; arguments []; default message [nic]]; default message [Nic is required.]] [Field error in object 'userCreateRequest' on field 'age': rejected value [null]; codes [NotNull.userCreateRequest.age,NotNull.age,NotNull.java.lang.Integer,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userCreateRequest.age,age]; arguments []; default message [age]]; default message [Age is required.]] [Field error in object 'userCreateRequest' on field 'lastName': rejected value [null]; codes [NotNull.userCreateRequest.lastName,NotNull.lastName,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userCreateRequest.lastName,lastName]; arguments []; default message [lastName]]; default message [LastName is required.]] [Field error in object 'userCreateRequest' on field 'genderType': rejected value [null]; codes [NotNull.userCreateRequest.genderType,NotNull.genderType,NotNull.com.rcs.enums.GenderType,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userCreateRequest.genderType,genderType]; arguments []; default message [genderType]]; default message [Gender Type is required.]] [Field error in object 'userCreateRequest' on field 'firstName': rejected value [null]; codes [NotNull.userCreateRequest.firstName,NotNull.firstName,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userCreateRequest.firstName,firstName]; arguments []; default message [firstName]]; default message [FirstName is required.]] [Field error in object 'userCreateRequest' on field 'contactNo': rejected value [null]; codes [NotNull.userCreateRequest.contactNo,NotNull.contactNo,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userCreateRequest.contactNo,contactNo]; arguments []; default message [contactNo]]; default message [Contact No is required.]] ]
+08:34:07.361 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+08:34:07.363 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+08:34:07.372 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+08:35:13.116 [main] INFO  com.rcs.RepairerCenterServiceApplication - Starting RepairerCenterServiceApplication using Java 17.0.9 with PID 18652 (G:\MyProject\Final Project\repairer-center-service\target\classes started by fraddy in G:\MyProject\Final Project\repairer-center-service)
+08:35:13.119 [main] INFO  com.rcs.RepairerCenterServiceApplication - The following 1 profile is active: "local"
+08:35:13.951 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:35:14.034 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 75 ms. Found 4 JPA repository interfaces.
+08:35:14.588 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 1001 (http)
+08:35:14.597 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:35:14.598 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+08:35:14.704 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring embedded WebApplicationContext
+08:35:14.705 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1539 ms
+08:35:14.902 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 9.16.3 by Redgate
+08:35:14.902 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+08:35:14.903 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - 
+08:35:14.916 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+08:35:15.112 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@35fa450f
+08:35:15.116 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+08:35:15.159 [main] INFO  org.flywaydb.core.internal.database.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/rcs (MySQL 8.0)
+08:35:15.221 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.028s)
+08:35:15.237 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `rcs`: 1.3
+08:35:15.238 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `rcs` is up to date. No migration necessary.
+08:35:15.340 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:35:15.409 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+08:35:15.412 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+08:35:15.725 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+08:35:17.051 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+08:35:17.057 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:35:18.430 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 1001 (http) with context path '/rcs/api'
+08:35:18.440 [main] INFO  com.rcs.RepairerCenterServiceApplication - Started RepairerCenterServiceApplication in 5.992 seconds (process running for 7.07)
+08:36:25.080 [http-nio-1001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:36:25.082 [http-nio-1001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:36:25.083 [http-nio-1001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+08:37:11.536 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+08:37:11.538 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+08:37:11.545 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+08:39:20.705 [main] INFO  com.rcs.RepairerCenterServiceApplication - Starting RepairerCenterServiceApplication using Java 17.0.9 with PID 16404 (G:\MyProject\Final Project\repairer-center-service\target\classes started by fraddy in G:\MyProject\Final Project\repairer-center-service)
+08:39:20.708 [main] INFO  com.rcs.RepairerCenterServiceApplication - The following 1 profile is active: "local"
+08:39:21.539 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:39:21.631 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 81 ms. Found 4 JPA repository interfaces.
+08:39:22.188 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 1001 (http)
+08:39:22.198 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:39:22.198 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+08:39:22.293 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring embedded WebApplicationContext
+08:39:22.294 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1531 ms
+08:39:22.481 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 9.16.3 by Redgate
+08:39:22.481 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+08:39:22.482 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - 
+08:39:22.493 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+08:39:22.662 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6568f998
+08:39:22.664 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+08:39:22.702 [main] INFO  org.flywaydb.core.internal.database.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/rcs (MySQL 8.0)
+08:39:22.786 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.044s)
+08:39:22.803 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `rcs`: 1.3
+08:39:22.803 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `rcs` is up to date. No migration necessary.
+08:39:22.903 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:39:22.980 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+08:39:22.983 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+08:39:23.286 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+08:39:24.629 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+08:39:24.634 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:39:26.233 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 1001 (http) with context path '/rcs/api'
+08:39:26.250 [main] INFO  com.rcs.RepairerCenterServiceApplication - Started RepairerCenterServiceApplication in 6.505 seconds (process running for 7.869)
+08:39:45.122 [http-nio-1001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:39:45.123 [http-nio-1001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:39:45.124 [http-nio-1001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+08:40:30.439 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+08:40:30.441 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+08:40:30.452 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+08:41:51.524 [main] INFO  com.rcs.RepairerCenterServiceApplication - Starting RepairerCenterServiceApplication using Java 17.0.9 with PID 18292 (G:\MyProject\Final Project\repairer-center-service\target\classes started by fraddy in G:\MyProject\Final Project\repairer-center-service)
+08:41:51.528 [main] INFO  com.rcs.RepairerCenterServiceApplication - The following 1 profile is active: "local"
+08:41:52.450 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:41:52.566 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 105 ms. Found 4 JPA repository interfaces.
+08:41:53.219 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 1001 (http)
+08:41:53.229 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:41:53.230 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+08:41:53.342 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring embedded WebApplicationContext
+08:41:53.342 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1753 ms
+08:41:53.549 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 9.16.3 by Redgate
+08:41:53.550 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+08:41:53.550 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - 
+08:41:53.563 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+08:41:53.747 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@25ad25f5
+08:41:53.750 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+08:41:53.798 [main] INFO  org.flywaydb.core.internal.database.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/rcs (MySQL 8.0)
+08:41:53.866 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.034s)
+08:41:53.883 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `rcs`: 1.3
+08:41:53.884 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `rcs` is up to date. No migration necessary.
+08:41:53.982 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:41:54.058 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.13.Final
+08:41:54.062 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+08:41:54.425 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+08:41:55.817 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+08:41:55.821 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:41:57.510 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 1001 (http) with context path '/rcs/api'
+08:41:57.526 [main] INFO  com.rcs.RepairerCenterServiceApplication - Started RepairerCenterServiceApplication in 7.148 seconds (process running for 8.59)
+08:42:02.229 [http-nio-1001-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/rcs/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:42:02.230 [http-nio-1001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:42:02.232 [http-nio-1001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms

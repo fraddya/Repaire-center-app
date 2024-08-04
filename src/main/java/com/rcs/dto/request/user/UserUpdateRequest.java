@@ -1,8 +1,9 @@
-package com.rcs.dto.response.user;
+package com.rcs.dto.request.user;
 
-import com.rcs.dto.request.user.UserUpdateRequest;
+
+import com.rcs.domain.Brand;
+import com.rcs.dto.request.vehiclepart.VehiclePartCreateRequest;
 import com.rcs.enums.GenderType;
-import com.rcs.enums.Status;
 import com.rcs.enums.UserType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -10,17 +11,22 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class UserSearchResponse {
-
-    private Long id;
+public class UserUpdateRequest {
 
     private String firstName;
+
     private String lastName;
+
     private String contactNo;
+
     private String dateJoin;
+
     private Integer age;
+
     private GenderType genderType;
+
     private String nic;
+
     private String nationality;
     private String image;
     private String religion;
@@ -28,17 +34,27 @@ public class UserSearchResponse {
     private String userLogging;
     private String passWord;
     private UserType role;
-    private Status status;
 
-    private List<UserUpdateRequest.VehicleData> vehicle;
+    private List<VehicleData> vehicle;
 
     @Data
     public static class VehicleData {
+        @NotNull(message = "Vehicle No is required.")
         private String vehicleNo;
+        @NotNull(message = "Model is required.")
         private String model;
+        @NotNull(message = "Year is required.")
         private String year;
+        @NotNull(message = "Color is required.")
         private String color;
+        @NotNull(message = "Type is required.")
         private String type;
         private String description;
+        private BrandData brand;
+
+        @Data
+        public static class BrandData {
+            private Long id;
+        }
     }
 }

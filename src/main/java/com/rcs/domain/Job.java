@@ -35,10 +35,10 @@ public class Job extends CreateModifyAwareBaseEntity {
 
     private BigDecimal actualPrice;
 
-    @OneToMany
+    @OneToMany(mappedBy = "job" ,cascade = { CascadeType.ALL }, orphanRemoval = true)
     private List<RepairerItems> repairerItems;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
     //need to add repairer estimate

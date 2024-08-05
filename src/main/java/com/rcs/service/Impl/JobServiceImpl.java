@@ -2,6 +2,7 @@ package com.rcs.service.Impl;
 
 import com.querydsl.core.BooleanBuilder;
 import com.rcs.domain.Job;
+import com.rcs.domain.QJob;
 import com.rcs.domain.RepairerItems;
 import com.rcs.domain.base.ComplexValidationException;
 import com.rcs.domain.criteria.JobCriteria;
@@ -83,6 +84,16 @@ public class JobServiceImpl implements JobService {
 
         Page<Job> jobs = null;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
+
+        if (criteria.getCustomerId() != null) {
+            booleanBuilder.and(QJob.job.customer().id.eq(criteria.getCustomerId()));
+        }
+        if (criteria.getAssignEmployeeId() != null) {
+            booleanBuilder.and(QJob.job.assignEmployee().id.eq(criteria.getAssignEmployeeId()));
+        }
+        if (criteria.getJobStatus() != null) {
+            booleanBuilder.and(QJob.job.jobStatus.eq(criteria.getJobStatus()));
+        }
 
         if (booleanBuilder.hasValue()) {
             jobs = repository.findAll(booleanBuilder, page);

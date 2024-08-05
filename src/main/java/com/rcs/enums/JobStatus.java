@@ -5,6 +5,8 @@ public enum JobStatus {
     WATINGFORCONFIRM("Waiting For Confirm", "WATINGFORCONFIRM"),
     CONFIRM("Confirm", "CONFIRM"),
 
+    REJECT("REJECT", "REJECT"),
+
     ASSIGN("Assign Employee", "ASSIGN"),
 
     START("START Repairer", "START"),

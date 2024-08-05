@@ -6,6 +6,10 @@ import lombok.Data;
 @Data
 public class JobCriteria extends Job {
 
+    private Long customerId;
+
+    private Long assignEmployeeId;
+
     private Integer pageNumber;
 
     private Integer pageSize;

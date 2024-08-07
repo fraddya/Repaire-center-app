@@ -30,10 +30,11 @@ public class UserSearchResponse {
     private UserType role;
     private Status status;
 
-    private List<UserUpdateRequest.VehicleData> vehicle;
+    private List<VehicleData> vehicle;
 
     @Data
     public static class VehicleData {
+        private Long id;
         private String vehicleNo;
         private String model;
         private String year;

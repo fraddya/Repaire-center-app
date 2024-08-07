@@ -17,12 +17,10 @@ public class JobUpdateRequest {
 
     private Long id;
 
-    @NotNull(message = "jobDate And Time is required.")
     private LocalDateTime jobDateAndTime;
 
     private JobStatus jobStatus;
 
-    @NotNull(message = "job Description is required.")
     private String jobDescription;
 
     private BigInteger estimateTime;

@@ -6,6 +6,8 @@ import com.rcs.domain.QJob;
 import com.rcs.domain.RepairerItems;
 import com.rcs.domain.base.ComplexValidationException;
 import com.rcs.domain.criteria.JobCriteria;
+import com.rcs.enums.JobStatus;
+import com.rcs.enums.RepairerItemStatus;
 import com.rcs.enums.Status;
 import com.rcs.repository.JobRepository;
 import com.rcs.service.JobService;
@@ -32,6 +34,7 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job create(Job job) {
         job.setStatus(Status.ACTIVE);
+        job.setJobStatus(JobStatus.NEWREQUEST);
         for (RepairerItems repairerItems : job.getRepairerItems()) {
             repairerItems.setJob(job);
         }
@@ -52,6 +55,26 @@ public class JobServiceImpl implements JobService {
         }
     }
 
+    @Transactional
+    @Override
+    public Job taskDone(Job job) {
+        Job jobDb = view(job.getId());
+        List<RepairerItems> repairerItemsList = new ArrayList<>();
+        if (jobDb == null) {
+            throw new ComplexValidationException("Job retrieval", "Cannot find any Job for this id");
+        }
+        updateRepairerItems(job, jobDb);
+        for (RepairerItems repairerItems : jobDb.getRepairerItems()) {
+            if ( repairerItems.getStatus() == null || !repairerItems.getStatus().equals(RepairerItemStatus.DONE)) {
+                repairerItemsList.add(repairerItems);
+            }
+        }
+        if (repairerItemsList.size() == 0) {
+            jobDb.setJobStatus(JobStatus.COMPLETE);
+        }
+        return repository.save(jobDb);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Job view(Long id) {
@@ -59,6 +82,7 @@ public class JobServiceImpl implements JobService {
         if (!jobPersisted.isPresent()) {
             throw new ComplexValidationException("JobViewRequest", "Invalid Job id");
         }
+        jobPersisted.get().getRepairerItems().size();
         return jobPersisted.get();
     }
 
@@ -83,7 +107,7 @@ public class JobServiceImpl implements JobService {
                         criteria.getSortProperty()));
 
         Page<Job> jobs = null;
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        BooleanBuilder booleanBuilder = new BooleanBuilder(QJob.job.status.ne(Status.DELETED));
 
         if (criteria.getCustomerId() != null) {
             booleanBuilder.and(QJob.job.customer().id.eq(criteria.getCustomerId()));
@@ -99,6 +123,9 @@ public class JobServiceImpl implements JobService {
             jobs = repository.findAll(booleanBuilder, page);
         } else {
             jobs = repository.findAll(page);
+        }
+        for (Job job : jobs) {
+            job.getRepairerItems().size();
         }
         return jobs;
     }

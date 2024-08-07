@@ -10,6 +10,8 @@ public interface JobService {
 
     Job update(Job job);
 
+    Job taskDone(Job job);
+
     Job view(Long id);
 
     Job delete(Long id);

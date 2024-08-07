@@ -62,14 +62,14 @@ public class UserServiceImpl implements UserService {
 
         Page<User> users = null;
 
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        BooleanBuilder booleanBuilder = new BooleanBuilder(QUser.user.status.ne(Status.DELETED));
 
         if (StringUtils.isNotBlank(criteria.getEmail())) {
             booleanBuilder.and(QUser.user.email.containsIgnoreCase(criteria.getEmail()));
         }
-        /*if (StringUtils.isNotBlank(criteria.getPassWord())) {
-            booleanBuilder.and(QUser.user.passWord.containsIgnoreCase(criteria.getPassWord()));
-        }*/
+        if (criteria.getRole() != null ) {
+            booleanBuilder.and(QUser.user.role.eq(UserType.valueOf(String.valueOf(criteria.getRole()))));
+        }
 
         if (booleanBuilder.hasValue()){
             users = userRepository.findAll(booleanBuilder, page);
@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
                 return userPersisted;
             }
         }
-        throw new ComplexValidationException("User credentials Invalid", user.getEmail());
+        throw new ComplexValidationException(user.getEmail(), "User credentials Invalid");
     }
 
 }

@@ -51,6 +51,7 @@ public class UserController {
     @PutMapping("${app.endpoint.userUpdate}")
     public ResponseEntity<SingleItemResponseWrapper<UserCreateResponse>> update(
             @PathVariable Long id, @Validated @RequestBody UserUpdateRequest request) {
+        log.info("update Request: {}", request);
 
         User employee = userMapper.mapToUserUpdate(request);
 

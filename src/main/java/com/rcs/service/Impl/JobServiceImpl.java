@@ -4,13 +4,17 @@ import com.querydsl.core.BooleanBuilder;
 import com.rcs.domain.Job;
 import com.rcs.domain.QJob;
 import com.rcs.domain.RepairerItems;
+import com.rcs.domain.VehiclePart;
 import com.rcs.domain.base.ComplexValidationException;
 import com.rcs.domain.criteria.JobCriteria;
 import com.rcs.enums.JobStatus;
 import com.rcs.enums.RepairerItemStatus;
 import com.rcs.enums.Status;
 import com.rcs.repository.JobRepository;
+import com.rcs.repository.VehiclePartRepository;
+import com.rcs.service.EmailService;
 import com.rcs.service.JobService;
+import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +23,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,14 +36,27 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private JobRepository repository;
+    @Autowired
+    private VehiclePartRepository vehiclePartRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Transactional
     @Override
     public Job create(Job job) {
+        //log.info("Job created: {}", job);
+        VehiclePart vehiclePart = new VehiclePart();
         job.setStatus(Status.ACTIVE);
+        job.setJobDateAndTime(LocalDateTime.now());
         job.setJobStatus(JobStatus.NEWREQUEST);
         for (RepairerItems repairerItems : job.getRepairerItems()) {
             repairerItems.setJob(job);
+            if (repairerItems.getPart() != null) {
+                vehiclePart = vehiclePartRepository.findById(repairerItems.getPart().getId()).get();
+                repairerItems.setEstimatePrice(vehiclePart.getPrice());
+                repairerItems.setQuantity(1);
+                repairerItems.setDescription("test");
+            }
         }
         return repository.save(job);
     }
@@ -71,8 +91,44 @@ public class JobServiceImpl implements JobService {
         }
         if (repairerItemsList.size() == 0) {
             jobDb.setJobStatus(JobStatus.COMPLETE);
+
+            //implement send email
+            sendEmail(jobDb);
         }
         return repository.save(jobDb);
+    }
+
+    private void sendEmail(Job jobDb) {
+        log.info("Invoice sent Start: {}");
+        StringBuilder htmlContent = new StringBuilder();
+        htmlContent.append("<h1 style='text-align: center;'>Invoice</h1>");
+        htmlContent.append("<p>Invoice ID: ").append(jobDb.getId()).append("</p>");
+        htmlContent.append("<p>Date: ").append(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))).append("</p>");
+        htmlContent.append("<p>Job Place Date: ").append(jobDb.getJobDateAndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))).append("</p>");
+        htmlContent.append("<p>Repairer Done By: ").append(jobDb.getAssignEmployee().getFirstName()).append("</p>");
+        htmlContent.append("<table>");
+        htmlContent.append("<tr><th>Item</th><th>Description</th></tr>");
+        for (RepairerItems item : jobDb.getRepairerItems()) {
+            htmlContent.append("<tr>")
+                    .append("<td>").append(item.getPart().getName()).append("</td>")
+                    //.append("<td>").append(item.getPart().getPrice()).append("</td>")
+                    .append("<td>").append(item.getDescription()).append("</td>")
+                    .append("</tr>");
+        }
+        htmlContent.append("</table>");
+        htmlContent.append("<p>Total: ").append(jobDb.getEstimatePrice()).append("</p>");
+        htmlContent.append("<p style='text-align: center;'>Thanks For Using Our Service</p><p style='text-align: center;'>Team RCS</p>");
+
+        //htmlContent.toString();
+
+        try {
+            emailService.sendInvoiceEmail(jobDb.getCustomer().getEmail(), "Your Invoice", htmlContent.toString());
+            //return ResponseEntity.ok("Invoice sent successfully");
+            log.info("Invoice sent End: {}");
+        } catch (MessagingException e) {
+            log.error("Invoice sent failed: {}", e.getMessage());
+            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send invoice");
+        }
     }
 
     @Transactional(readOnly = true)

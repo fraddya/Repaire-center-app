@@ -1,8 +1,7 @@
 package com.rcs.dto.request.user;
 
 
-import com.rcs.domain.Brand;
-import com.rcs.dto.request.vehiclepart.VehiclePartCreateRequest;
+
 import com.rcs.enums.GenderType;
 import com.rcs.enums.UserType;
 import jakarta.validation.constraints.NotNull;
@@ -39,6 +38,7 @@ public class UserUpdateRequest {
 
     @Data
     public static class VehicleData {
+        private Long id;
         @NotNull(message = "Vehicle No is required.")
         private String vehicleNo;
         @NotNull(message = "Model is required.")

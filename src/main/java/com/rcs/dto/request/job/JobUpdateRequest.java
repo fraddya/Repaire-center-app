@@ -15,6 +15,8 @@ import java.util.List;
 @Data
 public class JobUpdateRequest {
 
+    private String token;
+
     private Long id;
 
     private LocalDateTime jobDateAndTime;

@@ -16,6 +16,8 @@ import java.util.List;
 @Data
 public class JobSearchRequest extends BaseSearchRequest {
 
+    private String token;
+
     private Long id;
 
     private LocalDateTime jobDateAndTime;

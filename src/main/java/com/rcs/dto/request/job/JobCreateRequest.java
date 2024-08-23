@@ -15,7 +15,9 @@ import java.util.List;
 @Data
 public class JobCreateRequest {
 
-    @NotNull(message = "jobDate And Time is required.")
+    private String token;
+
+//    @NotNull(message = "jobDate And Time is required.")
     private LocalDateTime jobDateAndTime;
 
     private JobStatus jobStatus;

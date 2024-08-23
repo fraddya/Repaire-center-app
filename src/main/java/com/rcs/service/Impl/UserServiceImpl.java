@@ -175,6 +175,128 @@ public class UserServiceImpl implements UserService {
         updatedVehicle.setStatus(Status.ACTIVE);
     }
 
+    /*@Transactional
+    @Override
+    public User update(User user) {
+        Optional<User> userPersisted = userRepository.findById(user.getId());
+        if (!userPersisted.isPresent()) {
+            throw new ComplexValidationException("User update", "Invalid user id");
+        } else {
+            User userDb = userPersisted.get();
+
+            // Update simple fields if they are not null
+            if (user.getFirstName() != null) {
+                userDb.setFirstName(user.getFirstName());
+            }
+            if (user.getLastName() != null) {
+                userDb.setLastName(user.getLastName());
+            }
+            if (user.getContactNo() != null) {
+                userDb.setContactNo(user.getContactNo());
+            }
+            if (user.getDateJoin() != null) {
+                userDb.setDateJoin(user.getDateJoin());
+            }
+            if (user.getAge() != null) {
+                userDb.setAge(user.getAge());
+            }
+            if (user.getGenderType() != null) {
+                userDb.setGenderType(user.getGenderType());
+            }
+            if (user.getNic() != null) {
+                userDb.setNic(user.getNic());
+            }
+            if (user.getNationality() != null) {
+                userDb.setNationality(user.getNationality());
+            }
+            if (user.getImage() != null) {
+                userDb.setImage(user.getImage());
+            }
+            if (user.getReligion() != null) {
+                userDb.setReligion(user.getReligion());
+            }
+            if (user.getEmail() != null) {
+                userDb.setEmail(user.getEmail());
+            }
+
+            // Update Vehicles if provided
+            if (user.getVehicle() != null) {
+                List<Vehicle> newVehicles = new ArrayList<>();
+                List<Vehicle> deletedVehicles = new ArrayList<>();
+
+                if (user.getVehicle().size() >= userDb.getVehicle().size()) {
+                    for (Vehicle updatedVehicle : user.getVehicle()) {
+                        if (updatedVehicle.getId() == null) {
+                            newVehicles.add(updatedVehicle);
+                        } else {
+                            Optional<Vehicle> vehicleFound = userDb.getVehicle().stream()
+                                    .filter(vehicle -> vehicle.getId().equals(updatedVehicle.getId()))
+                                    .findFirst();
+                            if (vehicleFound.isPresent()) {
+                                updateExistingVehicle(vehicleFound.get(), updatedVehicle);
+                            } else {
+                                throw new ComplexValidationException("User update", "Invalid vehicle id: " + updatedVehicle.getId());
+                            }
+                        }
+                    }
+                } else {
+                    for (Vehicle existingVehicle : userDb.getVehicle()) {
+                        Optional<Vehicle> vehicleFound = user.getVehicle().stream()
+                                .filter(vehicle -> vehicle.getId().equals(existingVehicle.getId()))
+                                .findFirst();
+                        if (vehicleFound.isPresent()) {
+                            updateExistingVehicle(existingVehicle, vehicleFound.get());
+                        } else {
+                            deletedVehicles.add(existingVehicle);
+                        }
+                    }
+                }
+
+                if (!newVehicles.isEmpty()) {
+                    if (userDb.getVehicle() != null) {
+                        userDb.getVehicle().addAll(newVehicles);
+                    } else {
+                        userDb.setVehicle(newVehicles);
+                    }
+                }
+
+                if (!deletedVehicles.isEmpty()) {
+                    userDb.getVehicle().removeAll(deletedVehicles);
+                }
+            } else {
+                userDb.getVehicle().clear();
+            }
+
+            return userRepository.save(userDb);
+        }
+    }
+
+    // Helper method to update existing vehicle
+    private void updateExistingVehicle(Vehicle existingVehicle, Vehicle updatedVehicle) {
+        if (updatedVehicle.getVehicleNo() != null) {
+            existingVehicle.setVehicleNo(updatedVehicle.getVehicleNo());
+        }
+        if (updatedVehicle.getModel() != null) {
+            existingVehicle.setModel(updatedVehicle.getModel());
+        }
+        if (updatedVehicle.getYear() != null) {
+            existingVehicle.setYear(updatedVehicle.getYear());
+        }
+        if (updatedVehicle.getColor() != null) {
+            existingVehicle.setColor(updatedVehicle.getColor());
+        }
+        if (updatedVehicle.getType() != null) {
+            existingVehicle.setType(updatedVehicle.getType());
+        }
+        if (updatedVehicle.getDescription() != null) {
+            existingVehicle.setDescription(updatedVehicle.getDescription());
+        }
+        if (updatedVehicle.getBrand() != null) {
+            existingVehicle.setBrand(updatedVehicle.getBrand());
+        }
+    }*/
+
+
     @Transactional
     @Override
     public User delete(Long id) {
